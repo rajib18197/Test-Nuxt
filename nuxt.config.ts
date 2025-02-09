@@ -1,47 +1,64 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  future: {
-    compatibilityVersion: 4,
-  },
+	future: {
+		compatibilityVersion: 4,
+	},
 
-  colorMode: {
-    preference: "light",
-  },
+	colorMode: {
+		preference: "light",
+	},
 
-  experimental: {
-    sharedPrerenderData: false,
-    compileTemplate: true,
-    resetAsyncDataToUndefined: true,
-    templateUtils: true,
-    relativeWatchPaths: true,
-    defaults: {
-      useAsyncData: {
-        deep: true,
-      },
-    },
-  },
+	experimental: {
+		sharedPrerenderData: false,
+		compileTemplate: true,
+		resetAsyncDataToUndefined: true,
+		templateUtils: true,
+		relativeWatchPaths: true,
+		defaults: {
+			useAsyncData: {
+				deep: true,
+			},
+		},
+	},
 
-  unhead: {
-    renderSSRHeadOptions: {
-      omitLineBreaks: false,
-    },
-  },
+	unhead: {
+		renderSSRHeadOptions: {
+			omitLineBreaks: false,
+		},
+	},
 
-  image: {
-    domains: ["https://cdn.dummyjson.com"],
-  },
+	image: {
+		domains: ["https://cdn.dummyjson.com"],
+	},
 
-  devtools: { enabled: true },
+	devtools: { enabled: true },
 
-  modules: ["@nuxt/icon", "@nuxtjs/google-fonts", "@nuxt/image", "@nuxt/ui"],
+	modules: [
+		"@nuxt/icon",
+		"@nuxtjs/google-fonts",
+		"@nuxt/image",
+		"@nuxt/ui",
+		"@uploadthing/nuxt",
+	],
 
-  runtimeConfig: {
-    kitKey: process.env.KIT_KEY,
-  },
+	runtimeConfig: {
+		kitKey: process.env.KIT_KEY,
+		public: {
+			uploadthingSecret: process.env.NUXT_UPLOADTHING_SECRET,
+			uploadthingToken: process.env.NUXT_UPLOADTHING_TOKEN,
+			uploadthingIngestUrl: process.env.NUXT_UPLOADTHING_INGEST_URL,
+			uploadthingCallbackUrl: process.env.NUXT_UPLOADTHING_CALLBACK_URL,
+		},
 
-  googleFonts: {
-    families: {
-      Montserrat: true,
-    },
-  },
+		// public: {
+		// 	utAppId: process.env.NUXT_UT_APP_ID,
+		// },
+		// utSecretKey: process.env.NUXT_UT_SECRET_KEY,
+	},
+
+	googleFonts: {
+		families: {
+			Montserrat: true,
+		},
+	},
 });

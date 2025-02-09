@@ -76,6 +76,7 @@
 							accept=".pdf,image/*"
 							class="w-full mt-1 px-3 py-2 border rounded-lg"
 						/>
+						<!-- <UploadButton /> -->
 					</div>
 				</div>
 

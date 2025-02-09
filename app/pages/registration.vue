@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="flex flex-col justify-center items-center min-h-screen bg-white mt-20"
+		class="flex flex-col justify-center items-center min-h-screen bg-white mx-20 my-32"
 	>
 		<!-- Header Section -->
 		<div class="text-center max-w-4xl">
