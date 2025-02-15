@@ -40,7 +40,7 @@ useSeoMeta({
 // import { useUploadThing } from "@uploadthing/nuxt";
 
 // Initialize the UploadThing hook with the correct endpoint
-const { startUpload } = useUploadThing("imageUploader", {
+const { startUpload } = useUploadThing("videoAndImage", {
 	onClientUploadComplete(res) {
 		console.log("✅ Upload completed:", res);
 		if (res && res[0]?.fileUrl) {

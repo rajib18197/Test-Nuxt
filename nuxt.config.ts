@@ -40,6 +40,9 @@ export default defineNuxtConfig({
 		"@nuxt/ui",
 		"@uploadthing/nuxt",
 	],
+	uploadthing: {
+		routerPath: "~/server/api/uploadthing", // Ensure this matches your server-side route
+	},
 
 	runtimeConfig: {
 		kitKey: process.env.KIT_KEY,

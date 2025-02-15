@@ -18,7 +18,8 @@
 				<div class="hidden md:flex items-center space-x-6">
 					<!-- Desktop Dropdown for Services -->
 					<div class="relative group">
-						<button
+						<NuxtLink
+							to="/services"
 							class="text-gray-800 font-medium hover:text-blue-500 flex items-center"
 						>
 							Services
@@ -34,26 +35,14 @@
 									clip-rule="evenodd"
 								/>
 							</svg>
-						</button>
-						<!-- Desktop Dropdown Menu -->
-						<div
-							class="absolute hidden group-hover:block mt-2 w-40 bg-white shadow-md rounded-md"
-						>
-							<a
-								href="#"
-								class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-								>Service 1</a
-							>
-							<a
-								href="#"
-								class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-								>Service 2</a
-							>
-						</div>
+						</NuxtLink>
 					</div>
-					<a href="#" class="text-gray-800 font-medium hover:text-blue-500"
-						>Blog</a
+					<NuxtLink
+						to="/blog"
+						class="text-gray-800 font-medium hover:text-blue-500"
 					>
+						Blog
+					</NuxtLink>
 				</div>
 			</div>
 
@@ -90,67 +79,6 @@
 					/>
 				</svg>
 			</button>
-		</div>
-
-		<!-- Mobile Menu -->
-		<div
-			v-if="isMenuOpen"
-			class="md:hidden bg-white shadow-md py-4 absolute top-full left-0 w-full flex flex-col space-y-2"
-		>
-			<!-- Mobile Services Dropdown -->
-			<div>
-				<button
-					class="px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left flex justify-between"
-					@click="toggleDropdown"
-				>
-					Services
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-4 w-4 ml-1"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
-						<path
-							fill-rule="evenodd"
-							d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-				</button>
-				<div v-if="isDropdownVisible" class="bg-gray-100">
-					<a
-						href="#"
-						class="block px-6 py-2 text-gray-800 hover:bg-gray-200"
-						@click="closeMenu"
-						>Service 1</a
-					>
-					<a
-						href="#"
-						class="block px-6 py-2 text-gray-800 hover:bg-gray-200"
-						@click="closeMenu"
-						>Service 2</a
-					>
-				</div>
-			</div>
-			<a
-				href="#"
-				class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-				@click="closeMenu"
-				>Blog</a
-			>
-			<NuxtLink
-				to="/login"
-				class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-				@click="closeMenu"
-				>Login</NuxtLink
-			>
-			<NuxtLink
-				to="/registration"
-				class="block bg-blue-700 text-white px-4 py-2 mx-4 rounded-md font-medium hover:bg-blue-800"
-				@click="closeMenu"
-			>
-				Registration
-			</NuxtLink>
 		</div>
 	</nav>
 </template>

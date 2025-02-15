@@ -1,7 +1,6 @@
-import type { H3Event } from "h3";
-
-import type { FileRouter } from "uploadthing/h3";
-import { createUploadthing } from "uploadthing/h3";
+// server/api/uploadthing.ts
+import { createUploadthing, type FileRouter } from "uploadthing/h3";
+import { defineEventHandler, H3Event } from "h3";
 
 const f = createUploadthing();
 
@@ -40,3 +39,10 @@ export const uploadRouter = {
 } satisfies FileRouter;
 
 export type UploadRouter = typeof uploadRouter;
+
+// this is very important, make sure you expose the handler correctly
+export const { upload, utapi } = createUploadthing(uploadRouter);
+
+export default defineEventHandler((event: H3Event) => {
+	return upload(event);
+});

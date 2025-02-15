@@ -16,11 +16,17 @@
 						<h3 class="font-semibold text-black mb-4 text-lg">Get started</h3>
 						<ul class="space-y-1">
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600">Login</a>
+								<router-link
+									to="/login"
+									class="hover:text-gray-500 text-blue-600"
+									>Login</router-link
+								>
 							</li>
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Registration</a
+								<router-link
+									to="/registration"
+									class="hover:text-gray-500 text-blue-600"
+									>Registration</router-link
 								>
 							</li>
 						</ul>
@@ -30,23 +36,31 @@
 						<h3 class="font-semibold text-black mb-4 text-lg">Services</h3>
 						<ul class="space-y-1">
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Invest in a Business</a
+								<router-link
+									to="/invest"
+									class="hover:text-gray-500 text-blue-600"
+									>Invest in a Business</router-link
 								>
 							</li>
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Become a part of franchise</a
+								<router-link
+									to="/franchise"
+									class="hover:text-gray-500 text-blue-600"
+									>Become a part of franchise</router-link
 								>
 							</li>
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Sell your Business</a
+								<router-link
+									to="/sell-business"
+									class="hover:text-gray-500 text-blue-600"
+									>Sell your Business</router-link
 								>
 							</li>
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Apply for investment</a
+								<router-link
+									to="/apply-investment"
+									class="hover:text-gray-500 text-blue-600"
+									>Apply for investment</router-link
 								>
 							</li>
 						</ul>
@@ -56,21 +70,31 @@
 						<h3 class="font-semibold text-black mb-4 text-lg">Resources</h3>
 						<ul class="space-y-1">
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600">Blog</a>
-							</li>
-							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Help Centre</a
+								<router-link
+									to="/blog"
+									class="hover:text-gray-500 text-blue-600"
+									>Blog</router-link
 								>
 							</li>
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Courses</a
+								<router-link
+									to="/help"
+									class="hover:text-gray-500 text-blue-600"
+									>Help Centre</router-link
 								>
 							</li>
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>About Us</a
+								<router-link
+									to="/courses"
+									class="hover:text-gray-500 text-blue-600"
+									>Courses</router-link
+								>
+							</li>
+							<li>
+								<router-link
+									to="/about"
+									class="hover:text-gray-500 text-blue-600"
+									>About Us</router-link
 								>
 							</li>
 						</ul>
@@ -82,8 +106,10 @@
 						</h3>
 						<ul class="space-y-1">
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Overview</a
+								<router-link
+									to="/investment-overview"
+									class="hover:text-gray-500 text-blue-600"
+									>Overview</router-link
 								>
 							</li>
 						</ul>
@@ -93,8 +119,10 @@
 						<h3 class="font-semibold text-black mb-4 text-lg">For Investors</h3>
 						<ul class="space-y-1">
 							<li>
-								<a href="#" class="hover:text-gray-500 text-blue-600"
-									>Venture funds</a
+								<router-link
+									to="/venture-funds"
+									class="hover:text-gray-500 text-blue-600"
+									>Venture funds</router-link
 								>
 							</li>
 						</ul>
@@ -114,19 +142,25 @@
 						class="flex flex-wrap justify-center md:justify-start space-x-6 py-6"
 					>
 						<li>
-							<a href="#" class="hover:text-blue-500 text-base"
-								>Terms & conditions</a
+							<router-link to="/terms" class="hover:text-blue-500 text-base"
+								>Terms & conditions</router-link
 							>
 						</li>
 						<li>
-							<a href="#" class="hover:text-blue-500 text-base">Privacy</a>
+							<router-link to="/privacy" class="hover:text-blue-500 text-base"
+								>Privacy</router-link
+							>
 						</li>
 						<li>
-							<a href="#" class="hover:text-blue-500 text-base">Disclosures</a>
+							<router-link
+								to="/disclosures"
+								class="hover:text-blue-500 text-base"
+								>Disclosures</router-link
+							>
 						</li>
 						<li>
-							<a href="#" class="hover:text-blue-500 text-base"
-								>Cookie settings</a
+							<router-link to="/cookies" class="hover:text-blue-500 text-base"
+								>Cookie settings</router-link
 							>
 						</li>
 					</ul>
@@ -134,15 +168,27 @@
 					<div
 						class="flex justify-center md:justify-end space-x-4 text-2xl md:text-3xl"
 					>
-						<a href="#" class="hover:text-blue-500"
-							><i class="fab fa-linkedin"></i
-						></a>
-						<a href="#" class="hover:text-blue-500"
-							><i class="fab fa-twitter"></i
-						></a>
-						<a href="#" class="hover:text-blue-500"
-							><i class="fab fa-facebook"></i
-						></a>
+						<a
+							href="https://linkedin.com"
+							target="_blank"
+							class="hover:text-blue-500"
+						>
+							<i class="fab fa-linkedin"></i>
+						</a>
+						<a
+							href="https://twitter.com"
+							target="_blank"
+							class="hover:text-blue-500"
+						>
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a
+							href="https://facebook.com"
+							target="_blank"
+							class="hover:text-blue-500"
+						>
+							<i class="fab fa-facebook"></i>
+						</a>
 					</div>
 				</div>
 
@@ -151,34 +197,7 @@
 					class="text-gray-500 text-xs leading-relaxed text-center md:text-left"
 				>
 					<h3 class="font-semibold text-gray-800 mb-2">Disclaimer</h3>
-					<p>
-						At vero eos et accusamus et iusto odio dignissimos ducimus qui
-						blanditiis praesentium voluptatum deleniti atque corrupti quos
-						dolores et quas molestias excepturi sint occaecati cupiditate non
-						provident, similique sunt in culpa qui officia deserunt mollitia
-						animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis
-						est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-						eligendi optio cumque nihil impedit quo minus id quod maxime placeat
-						facere possimus, omnis voluptas assumenda est, omnis dolor
-						repellendus. Temporibus autem quibusdam et aut officiis debitis aut
-						rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint
-						et molestiae non recusandae. Itaque earum rerum hic tenetur a
-						sapiente delectus, ut aut reiciendis voluptatibus maiores alias
-						consequatur aut perferendis doloribus asperiores repellat. At vero
-						eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-						praesentium voluptatum deleniti atque corrupti quos dolores et quas
-						molestias excepturi sint occaecati cupiditate non provident,
-						similique sunt in culpa qui officia deserunt mollitia animi, id est
-						laborum et dolorum fuga. Et harum quidem rerum facilis est et
-						expedita distinctio. Nam libero tempore, cum soluta nobis est
-						eligendi optio cumque nihil impedit quo minus id quod maxime placeat
-						facere possimus, omnis voluptas assumenda est, omnis dolor
-						repellendus. Temporibus autem quibusdam et aut officiis debitis aut
-						rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint
-						et molestiae non recusandae. Itaque earum rerum hic tenetur a
-						sapiente delectus, ut aut reiciendis voluptatibus maiores alias
-						consequatur aut perferendis doloribus asperiores repellat.
-					</p>
+					<p>This is a placeholder disclaimer text.</p>
 				</div>
 			</div>
 		</div>
@@ -192,6 +211,5 @@ export default {
 </script>
 
 <style scoped>
-/* FontAwesome for social media icons */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 </style>
