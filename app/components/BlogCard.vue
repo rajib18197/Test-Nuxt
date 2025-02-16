@@ -34,7 +34,22 @@
 
 <script setup>
 defineProps({
-	post: Object,
+	post: {
+		type: Object,
+		required: true,
+		validator: (value) => {
+			return (
+				typeof value === "object" &&
+				value !== null &&
+				"image" in value &&
+				"date" in value &&
+				"readTime" in value &&
+				"title" in value &&
+				"excerpt" in value &&
+				"slug" in value
+			);
+		},
+	},
 });
 </script>
 

@@ -1,56 +1,79 @@
-/* File: pages/blog.vue */
 <template>
+	<!-- Featured Post - Full Width -->
+	<div class="bg-gray-200 py-16 px-4 md:px-12 shadow-lg">
+		<div
+			class="max-w-[1520px] mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 pt-20"
+		>
+			<div class="flex flex-col justify-center">
+				<p class="text-blue-500 font-medium text-sm">New Post</p>
+				<h1 class="text-5xl font-bold mt-4 leading-tight">
+					Understanding the Basics of Investing
+				</h1>
+				<p class="text-gray-500 mt-4 text-lg">March 15, 2025 · 8 min read</p>
+				<p class="text-gray-600 mt-6 text-lg leading-relaxed">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio
+					ullamcorper sed posuere consectetur viverra non iaculis porta.
+				</p>
+			</div>
+			<div>
+				<img
+					src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+					alt="Blog image"
+					class="rounded-lg w-full h-full object-cover shadow-md"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<!-- Recent Posts Section -->
 	<div
-		class="max-w-[1520px] mx-auto flex flex-col items-center px-4 md:px-8 py-16 pt-28"
+		class="max-w-[1520px] mx-auto flex flex-col items-center px-4 md:px-8 py-16"
 	>
-		<div class="max-w-[1520px] mx-auto">
-			<!-- Featured Post -->
-			<div
-				class="grid grid-cols-1 md:grid-cols-2 items-center gap-8 bg-gray-200 p-12 rounded-lg shadow-lg"
+		<div
+			class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 px-8 justify-center"
+		>
+			<NuxtLink
+				v-for="(post, index) in posts"
+				:key="index"
+				:to="'/blog/' + post.slug"
+				class="flex justify-center"
+				:class="{ 'mt-8': index >= 3 }"
 			>
-				<div class="flex flex-col justify-center">
-					<p class="text-blue-500 font-medium text-sm">New Post</p>
-					<h1 class="text-5xl font-bold mt-4 leading-tight">
-						Understanding the Basics of Investing
-					</h1>
-					<p class="text-gray-500 mt-4 text-lg">March 15, 2025 · 8 min read</p>
-					<p class="text-gray-600 mt-6 text-lg leading-relaxed">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio
-						ullamcorper sed posuere consectetur viverra non iaculis porta.
-					</p>
-				</div>
-				<div>
-					<img
-						src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-						alt="Blog image"
-						class="rounded-lg w-full h-full object-cover shadow-md"
-					/>
-				</div>
-			</div>
+				<BlogCard :post="post" class="h-full w-[90%] md:w-[80%]" />
+			</NuxtLink>
+		</div>
 
-			<!-- Recent Posts -->
-			<div
-				class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 px-8 justify-center"
+		<!-- Load More Button -->
+		<div class="mt-12 flex justify-center mb-20">
+			<button
+				class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
 			>
-				<NuxtLink
-					v-for="(post, index) in posts"
-					:key="index"
-					:to="'/blog/' + post.slug"
-					class="flex justify-center"
-					:class="{ 'mt-8': index >= 3 }"
-				>
-					<BlogCard :post="post" class="h-full w-[90%] md:w-[80%]" />
-				</NuxtLink>
-			</div>
+				Read more
+			</button>
+		</div>
+	</div>
 
-			<!-- Load More Button -->
-			<div class="mt-12 flex justify-center">
-				<button
-					class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
-				>
-					Read more
-				</button>
-			</div>
+	<!-- Subscription Part - Full Width -->
+	<div
+		class="bg-gray-900 py-16 px-5 flex flex-col items-center text-center w-full"
+	>
+		<h2 class="text-white text-2xl font-semibold">Stay Updated</h2>
+		<p class="text-gray-400 mt-2">
+			Get the latest articles and news straight to your inbox.
+		</p>
+		<div class="mt-4 flex">
+			<input
+				v-model="email"
+				type="email"
+				placeholder="Enter your email"
+				class="px-4 py-4 rounded-md focus:outline-none w-[450px]"
+			/>
+			<button
+				@click="subscribe"
+				class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md ml-2"
+			>
+				Subscribe
+			</button>
 		</div>
 	</div>
 </template>
@@ -58,6 +81,17 @@
 <script setup>
 import { ref } from "vue";
 import BlogCard from "@/components/BlogCard.vue";
+
+const email = ref("");
+
+const subscribe = () => {
+	if (email.value) {
+		alert(`Subscribed with: ${email.value}`);
+		email.value = "";
+	} else {
+		alert("Please enter a valid email");
+	}
+};
 
 const posts = ref([
 	{
