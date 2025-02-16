@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="flex flex-col justify-center items-center min-h-screen bg-white mx-20 my-32"
+		class="flex flex-col justify-center items-center min-h-screen bg-white mx-16 my-16"
 	>
 		<!-- Header Section -->
 		<div class="text-center max-w-4xl">
@@ -57,25 +57,27 @@
 		<div class="mt-12 text-center">
 			<p class="text-lg text-gray-600">
 				Read our
-				<nuxt-link to="/terms" class="text-blue-500 hover:underline"
-					>terms and conditions</nuxt-link
+				<span
+					@click="navigateTo('/terms')"
+					class="text-blue-500 hover:underline cursor-pointer"
 				>
+					terms and conditions
+				</span>
 			</p>
 		</div>
 	</div>
 </template>
 
-<script>
-export default {
-	methods: {
-		navigateTo(route) {
-			// Programmatically navigate to the specified route
-			this.$router.push(route);
-		},
-	},
+<script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const navigateTo = (route) => {
+	router.push(route);
 };
 </script>
 
-<style>
+<style scoped>
 /* Add custom styles here if needed */
 </style>

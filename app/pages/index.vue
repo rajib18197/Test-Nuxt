@@ -108,7 +108,7 @@ const handleFileUpload = async (e: Event) => {
 					class="mt-10 md:mt-0 md:ml-8 animate-fade-in animate-duration-1000 animate-delay-300 animate-zoom-in"
 				>
 					<NuxtImg
-						src="https://img.freepik.com/free-photo/plant-growing-coins-glass-jar-money-green-grass_155003-5432.jpg?t=st=1736941867~exp=1736945467~hmac=4a0f08c13137a235046f68d581897e1ddfc0ada809e17ebf6bede8541a98edf2&w=1060"
+						src="https://images.unsplash.com/photo-1640574232355-08659783b9fb?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 						alt="Hero Section Illustration"
 						class="w-[600px] h-auto rounded-lg"
 						format="jpg"
