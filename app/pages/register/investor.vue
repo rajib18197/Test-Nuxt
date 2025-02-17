@@ -232,18 +232,96 @@
 				</div>
 			</form>
 
-			<p class="text-sm text-center text-gray-600 mt-4">
+			<!-- <p class="text-sm text-center text-gray-600 mt-4">
 				<a
 					href="#"
 					class="text-blue-600 hover:underline"
 					@click.prevent="openModal"
 					>Read terms and conditions</a
 				>
-			</p>
+			</p> -->
+			<!-- Terms & Conditions Modal -->
+			<div
+				v-show="showModal"
+				class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+			>
+				<div
+					class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto"
+				>
+					<div class="flex justify-between items-center mb-4">
+						<h2 class="text-2xl font-semibold">Terms & Conditions</h2>
+						<button
+							@click="toggleModal"
+							class="text-gray-500 hover:text-gray-700"
+						>
+							<svg
+								class="w-6 h-6"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M6 18L18 6M6 6l12 12"
+								/>
+							</svg>
+						</button>
+					</div>
+					<div class="space-y-4 text-gray-600">
+						<p>Please read these terms carefully before proceeding:</p>
+						<!-- Add your actual terms content here -->
+						<p>
+							1. By registering, you agree to our privacy policy and terms of
+							service.
+						</p>
+						<p>
+							2. All investments carry risk, and past performance is not
+							indicative of future results.
+						</p>
+						<p>
+							3. You must maintain accurate and up-to-date registration
+							information.
+						</p>
+						<p>
+							4. We reserve the right to verify all submitted documents and
+							information.
+						</p>
+						<p>
+							5. Any fraudulent activity will result in immediate account
+							termination.
+						</p>
+					</div>
+					<div class="mt-6 text-right">
+						<button
+							@click="toggleModal"
+							class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+						>
+							I Understand
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Existing form content -->
+			<div class="bg-gray-100 w-full max-w-5xl p-6 items-center">
+				<!-- ... existing form elements ... -->
+
+				<p class="text-sm text-gray-600 mt-2 text-center">
+					<a
+						href="#"
+						@click.prevent="toggleModal"
+						class="text-blue-600 hover:underline"
+					>
+						Read terms and conditions
+					</a>
+				</p>
+			</div>
 		</div>
 	</div>
 
-	<!-- Modal for Terms and Conditions -->
+	<!-- Modal for Terms and Conditions
 	<div
 		v-if="isModalOpen"
 		class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
@@ -262,13 +340,15 @@
 				</button>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </template>
 
 <script>
 export default {
 	data() {
 		return {
+			showModal: false,
+			// ... existing data properties ...
 			form: {
 				fullName: "",
 				email: "",
@@ -290,6 +370,10 @@ export default {
 		};
 	},
 	methods: {
+		toggleModal() {
+			this.showModal = !this.showModal;
+		},
+		// ... existing methods ...
 		handleFileUpload(field, event) {
 			const file = event.target.files[0];
 			this.form[field] = file;
@@ -298,12 +382,12 @@ export default {
 			console.log("Form Data:", this.form);
 			alert("Form submitted successfully!");
 		},
-		openModal() {
-			this.isModalOpen = true;
-		},
-		closeModal() {
-			this.isModalOpen = false;
-		},
+		// openModal() {
+		// 	this.isModalOpen = true;
+		// },
+		// closeModal() {
+		// 	this.isModalOpen = false;
+		// },
 	},
 };
 </script>

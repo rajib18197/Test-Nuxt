@@ -59,8 +59,20 @@
 		>
 			<div class="bg-white p-8 rounded-lg w-3/4 md:w-1/2">
 				<h2 class="text-2xl font-bold text-gray-800 mb-4">
-					Terms and Conditions
+					ICB Terms & Conditions
 				</h2>
+				<p class="text-xl text-gray-700 mb-4">
+					These are the terms and conditions. Please read them carefully.
+					<br />
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+					eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				</p>
+				<p class="text-xl text-gray-700 mb-4">
+					These are the terms and conditions. Please read them carefully.
+					<br />
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+					eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				</p>
 				<p class="text-xl text-gray-700 mb-4">
 					These are the terms and conditions. Please read them carefully.
 					<br />
