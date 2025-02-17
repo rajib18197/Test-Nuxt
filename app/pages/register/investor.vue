@@ -233,10 +233,34 @@
 			</form>
 
 			<p class="text-sm text-center text-gray-600 mt-4">
-				<a href="#" class="text-blue-600 hover:underline"
+				<a
+					href="#"
+					class="text-blue-600 hover:underline"
+					@click.prevent="openModal"
 					>Read terms and conditions</a
 				>
 			</p>
+		</div>
+	</div>
+
+	<!-- Modal for Terms and Conditions -->
+	<div
+		v-if="isModalOpen"
+		class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+	>
+		<div class="bg-white p-8 rounded-lg w-3/4 md:w-1/2">
+			<h1 class="text-2xl font-bold mb-6">ICB Terms & Conditions</h1>
+			<p class="text-gray-700 mb-4">
+				Terms and Conditions content goes here...
+			</p>
+			<div class="flex justify-end">
+				<button
+					class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700"
+					@click="closeModal"
+				>
+					Close
+				</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -262,6 +286,7 @@ export default {
 				address: "",
 				investmentAmount: null,
 			},
+			isModalOpen: false,
 		};
 	},
 	methods: {
@@ -272,6 +297,12 @@ export default {
 		submitForm() {
 			console.log("Form Data:", this.form);
 			alert("Form submitted successfully!");
+		},
+		openModal() {
+			this.isModalOpen = true;
+		},
+		closeModal() {
+			this.isModalOpen = false;
 		},
 	},
 };
