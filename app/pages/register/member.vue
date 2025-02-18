@@ -1,327 +1,236 @@
 <template>
-	<div
-		class="flex flex-col justify-center items-center min-h-screen bg-white mt-32 m-20"
-	>
-		<!-- Header Section -->
-		<div class="text-center max-w-5xl">
-			<h1 class="text-4xl font-bold text-gray-800">
-				Join us today to connect with great ventures and make the most of your
-				investments!
-			</h1>
+	<div class="max-w-6xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-28 mb-20">
+		<!-- Back Button -->
+		<div class="mb-6">
+			<button
+				@click="goBack"
+				class="text-blue-600 hover:text-blue-800 font-semibold"
+			>
+				← Back
+			</button>
+		</div>
+
+		<!-- Header -->
+		<div class="text-center mb-8">
+			<h2 class="text-2xl font-semibold text-gray-800">
+				Join us today to connect with great ventures and <br />
+				make the most of your investments!
+			</h2>
 		</div>
 
 		<!-- Registration Notice -->
-		<div
-			class="mt-8 w-full max-w-6xl bg-[#d1ac69] border border-yellow-300 text-gray-800 rounded-lg p-8"
-		>
-			<p class="text-xl font-bold">*Registration Notice</p>
-			<p class="mt-4 text-lg">
+		<div class="bg-[#D1AC69] p-6 rounded-lg mb-6">
+			<h3 class="font-semibold text-gray-700">*Registration Notice</h3>
+			<p class="text-sm text-gray-600">
 				To complete your registration, please note that a payment of [amount] is
 				required. You can make this payment through any of the following
 				methods:
 			</p>
-			<ul class="mt-4 list-disc list-inside text-lg">
+			<ul class="list-disc text-sm text-gray-600 pl-4">
 				<li>Mobile Wallet: [Mobile Wallet Number]</li>
 				<li>Bank Transfer: [Bank Account Details]</li>
 				<li>Cash Payment: [Applicable for offline registration]</li>
 			</ul>
-			<p class="mt-4 text-lg">
+			<p class="text-sm text-gray-600">
 				Once the payment is made, kindly retain the receipt or transaction ID as
 				proof of payment. For any queries or assistance, feel free to contact us
 				at [Contact Information].
 			</p>
 		</div>
 
-		<!-- Registration Form -->
-		<div class="mt-10 w-full max-w-6xl bg-gray-100 rounded-lg shadow-lg p-12">
-			<form @submit.prevent="handleSubmit" class="space-y-8">
-				<!-- Full Name and Email -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-					<div>
-						<label
-							for="fullName"
-							class="block text-xl font-medium text-gray-700"
-							>Your Full Name</label
-						>
-						<input
-							id="fullName"
-							v-model="form.fullName"
-							type="text"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-							placeholder="Enter your full name"
-						/>
-					</div>
-					<div>
-						<label for="email" class="block text-xl font-medium text-gray-700"
-							>Email Address</label
-						>
-						<input
-							id="email"
-							v-model="form.email"
-							type="email"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-							placeholder="Enter your email"
-						/>
-					</div>
-				</div>
+		<!-- Form -->
+		<form
+			@submit.prevent="handleSubmit"
+			class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"
+		>
+			<!-- Full Name & Email -->
+			<div>
+				<label class="block text-gray-700">Your Full Name</label>
+				<input
+					v-model="form.fullName"
+					type="text"
+					class="input-field"
+					placeholder="Enter full name"
+				/>
+			</div>
+			<div>
+				<label class="block text-gray-700">Email address</label>
+				<input
+					v-model="form.email"
+					type="email"
+					class="input-field"
+					placeholder="Enter email"
+				/>
+			</div>
 
-				<!-- NID and NID Image -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-					<div>
-						<label
-							for="nidNumber"
-							class="block text-xl font-medium text-gray-700"
-							>NID Number</label
-						>
-						<input
-							id="nidNumber"
-							v-model="form.nidNumber"
-							type="text"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-							placeholder="Enter your NID number"
-						/>
-					</div>
-					<div>
-						<label class="block text-xl font-medium text-gray-700"
-							>NID Image/PDF</label
-						>
-						<input
-							type="file"
-							@change="handleFileUpload($event, 'nidImage')"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-3 text-lg text-gray-600 focus:ring-blue-500 focus:border-blue-500"
-						/>
-					</div>
-				</div>
+			<!-- NID Number & NID Image -->
+			<div>
+				<label class="block text-gray-700">NID number</label>
+				<input
+					v-model="form.nidNumber"
+					type="text"
+					class="input-field"
+					placeholder="Enter NID number"
+				/>
+			</div>
+			<div>
+				<label class="block text-gray-700">NID image/PDF</label>
+				<input
+					@change="handleFileUpload($event, 'nidImage')"
+					type="file"
+					class="file-input"
+				/>
+			</div>
 
-				<!-- Phone Number and Passport Number -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-					<div>
-						<label
-							for="phoneNumber"
-							class="block text-xl font-medium text-gray-700"
-							>Phone Number</label
-						>
-						<input
-							id="phoneNumber"
-							v-model="form.phoneNumber"
-							type="text"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-							placeholder="Enter your phone number"
-						/>
-					</div>
-					<div>
-						<label
-							for="passportNumber"
-							class="block text-xl font-medium text-gray-700"
-							>Passport Number (if any)</label
-						>
-						<input
-							id="passportNumber"
-							v-model="form.passportNumber"
-							type="text"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-							placeholder="Enter your passport number"
-						/>
-					</div>
-				</div>
+			<!-- Phone Number & Passport Number -->
+			<div>
+				<label class="block text-gray-700">Phone number</label>
+				<input
+					v-model="form.phoneNumber"
+					type="text"
+					class="input-field"
+					placeholder="Enter phone number"
+				/>
+			</div>
+			<div>
+				<label class="block text-gray-700">Passport number (if any)</label>
+				<input
+					v-model="form.passportNumber"
+					type="text"
+					class="input-field"
+					placeholder="Enter passport number"
+				/>
+			</div>
 
-				<!-- Passport Photo and Passport Image -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-					<div>
-						<label class="block text-xl font-medium text-gray-700"
-							>Passport Size Photo</label
-						>
-						<input
-							type="file"
-							@change="handleFileUpload($event, 'passportPhoto')"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-3 text-lg text-gray-600 focus:ring-blue-500 focus:border-blue-500"
-						/>
-					</div>
-					<div>
-						<label class="block text-xl font-medium text-gray-700"
-							>Passport Image (if any)</label
-						>
-						<input
-							type="file"
-							@change="handleFileUpload($event, 'passportImage')"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-3 text-lg text-gray-600 focus:ring-blue-500 focus:border-blue-500"
-						/>
-					</div>
-				</div>
+			<!-- Passport Photo & Image -->
+			<div>
+				<label class="block text-gray-700">Passport size photo</label>
+				<input
+					@change="handleFileUpload($event, 'passportPhoto')"
+					type="file"
+					class="file-input"
+				/>
+			</div>
+			<div>
+				<label class="block text-gray-700">Passport Image (if any)</label>
+				<input
+					@change="handleFileUpload($event, 'passportImage')"
+					type="file"
+					class="file-input"
+				/>
+			</div>
 
-				<!-- Division, District, and Thana -->
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<div>
-						<label
-							for="division"
-							class="block text-xl font-medium text-gray-700"
-							>Division</label
-						>
-						<select
-							id="division"
-							v-model="form.division"
-							@change="updateDistricts"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-						>
-							<option value="" disabled>Select Division</option>
-							<option
-								v-for="division in divisions"
-								:key="division"
-								:value="division"
-							>
-								{{ division }}
-							</option>
-						</select>
-					</div>
-					<div>
-						<label
-							for="district"
-							class="block text-xl font-medium text-gray-700"
-							>District</label
-						>
-						<select
-							id="district"
-							v-model="form.district"
-							@change="updateThanas"
-							:disabled="!form.division"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-						>
-							<option value="" disabled>Select District</option>
-							<option
-								v-for="district in districts"
-								:key="district"
-								:value="district"
-							>
-								{{ district }}
-							</option>
-						</select>
-					</div>
-					<div>
-						<label for="thana" class="block text-xl font-medium text-gray-700"
-							>Thana</label
-						>
-						<select
-							id="thana"
-							v-model="form.thana"
-							:disabled="!form.district"
-							class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-						>
-							<option value="" disabled>Select Thana</option>
-							<option v-for="thana in thanas" :key="thana" :value="thana">
-								{{ thana }}
-							</option>
-						</select>
-					</div>
-				</div>
-
-				<!-- Full Address -->
+			<!-- Division, District, Thana (Dropdowns) -->
+			<div class="col-span-2 grid grid-cols-3 gap-4">
 				<div>
-					<label
-						for="fullAddress"
-						class="block text-xl font-medium text-gray-700"
-						>Full Address</label
+					<label class="block text-gray-700">Division</label>
+					<select
+						v-model="form.division"
+						@change="updateDistricts"
+						class="input-field"
 					>
-					<textarea
-						id="fullAddress"
-						v-model="form.fullAddress"
-						rows="4"
-						class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm px-4 py-4 text-lg focus:ring-blue-500 focus:border-blue-500"
-						placeholder="Enter your full address"
-					></textarea>
+						<option value="" disabled selected>Select Division</option>
+						<option
+							v-for="division in divisions"
+							:key="division"
+							:value="division"
+						>
+							{{ division }}
+						</option>
+					</select>
 				</div>
-
-				<!-- Submit Button -->
-				<div class="text-center">
-					<button
-						type="submit"
-						class="w-full md:w-auto bg-blue-600 text-white py-4 px-10 text-xl rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+				<div>
+					<label class="block text-gray-700">District</label>
+					<select
+						v-model="form.district"
+						@change="updateThanas"
+						class="input-field"
 					>
-						Submit
-					</button>
+						<option value="" disabled selected>Select District</option>
+						<option
+							v-for="district in districts"
+							:key="district"
+							:value="district"
+						>
+							{{ district }}
+						</option>
+					</select>
 				</div>
-			</form>
-			<!-- <p class="text-sm text-center text-gray-600 mt-4">
-				<a href="#" class="text-blue-600 hover:underline"
-					>Read terms and conditions</a
-				>
-			</p> -->
-			<!-- Terms & Conditions Modal -->
-			<div
-				v-show="showModal"
-				class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-			>
-				<div
-					class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto"
-				>
-					<div class="flex justify-between items-center mb-4">
-						<h2 class="text-2xl font-semibold">Terms & Conditions</h2>
-						<button
-							@click="toggleModal"
-							class="text-gray-500 hover:text-gray-700"
-						>
-							<svg
-								class="w-6 h-6"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M6 18L18 6M6 6l12 12"
-								/>
-							</svg>
-						</button>
-					</div>
-					<div class="space-y-4 text-gray-600">
-						<p>Please read these terms carefully before proceeding:</p>
-						<!-- Add your actual terms content here -->
-						<p>
-							1. By registering, you agree to our privacy policy and terms of
-							service.
-						</p>
-						<p>
-							2. All investments carry risk, and past performance is not
-							indicative of future results.
-						</p>
-						<p>
-							3. You must maintain accurate and up-to-date registration
-							information.
-						</p>
-						<p>
-							4. We reserve the right to verify all submitted documents and
-							information.
-						</p>
-						<p>
-							5. Any fraudulent activity will result in immediate account
-							termination.
-						</p>
-					</div>
-					<div class="mt-6 text-right">
-						<button
-							@click="toggleModal"
-							class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-						>
-							I Understand
-						</button>
-					</div>
+				<div>
+					<label class="block text-gray-700">Thana</label>
+					<select v-model="form.thana" class="input-field">
+						<option value="" disabled selected>Select Thana</option>
+						<option v-for="thana in thanas" :key="thana" :value="thana">
+							{{ thana }}
+						</option>
+					</select>
 				</div>
 			</div>
 
-			<!-- Existing form content -->
-			<div class="bg-gray-100 w-full max-w-5xl p-6 items-center">
-				<!-- ... existing form elements ... -->
+			<!-- Full Address -->
+			<div class="col-span-2">
+				<label class="block text-gray-700">Full Address</label>
+				<textarea
+					v-model="form.fullAddress"
+					class="input-field"
+					placeholder="Enter full address"
+				></textarea>
+			</div>
 
-				<p class="text-sm ml-10 text-gray-600 mt-2 text-center">
-					<a
-						href="#"
-						@click.prevent="toggleModal"
-						class="text-blue-600 hover:underline"
-					>
-						Read terms and conditions
-					</a>
+			<!-- Payment Method & Transaction ID -->
+			<div>
+				<label class="block text-gray-700">Select payment method</label>
+				<select v-model="form.paymentMethod" class="input-field">
+					<option value="" disabled selected>Select Payment Method</option>
+					<option>Mobile Wallet</option>
+					<option>Bank Transfer</option>
+					<option>Cash Payment</option>
+				</select>
+			</div>
+			<div>
+				<label class="block text-gray-700">Transaction ID</label>
+				<input
+					v-model="form.transactionId"
+					type="text"
+					class="input-field"
+					placeholder="Enter transaction ID"
+				/>
+			</div>
+
+			<!-- Submit Button -->
+			<div class="col-span-2 text-center mt-6">
+				<button
+					type="submit"
+					class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+				>
+					Submit
+				</button>
+			</div>
+		</form>
+
+		<!-- Terms and Conditions Link -->
+		<div class="text-center mt-6">
+			<a href="#" class="text-blue-600" @click.prevent="toggleModal"
+				>Read terms and conditions</a
+			>
+		</div>
+
+		<!-- Terms and Conditions Modal -->
+		<div
+			v-if="showModal"
+			class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
+		>
+			<div class="bg-white p-8 rounded-lg shadow-lg w-3/4 md:w-1/2">
+				<h2 class="text-xl font-semibold mb-4">Terms and Conditions</h2>
+				<p class="mb-4 text-sm text-gray-600">
+					Here are the terms and conditions...
 				</p>
+				<button
+					@click="toggleModal"
+					class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+				>
+					Close
+				</button>
 			</div>
 		</div>
 	</div>
@@ -332,7 +241,6 @@ export default {
 	data() {
 		return {
 			showModal: false,
-			// ... existing data properties ...
 			form: {
 				fullName: "",
 				email: "",
@@ -343,6 +251,8 @@ export default {
 				district: "",
 				thana: "",
 				fullAddress: "",
+				paymentMethod: "",
+				transactionId: "",
 			},
 			divisions: ["Dhaka", "Chattogram", "Sylhet", "Khulna"],
 			districts: [],
@@ -365,7 +275,6 @@ export default {
 		toggleModal() {
 			this.showModal = !this.showModal;
 		},
-		// ... existing methods ...
 		updateDistricts() {
 			this.districts = this.divisionData[this.form.division] || [];
 			this.form.district = "";
@@ -383,10 +292,19 @@ export default {
 			console.log("Form submitted:", this.form);
 			alert("Form submitted successfully!");
 		},
+		goBack() {
+			this.$router.go(-1); // Goes one step back in browser history
+		},
 	},
 };
 </script>
 
-<style>
-/* Add any custom styles if needed */
+<style scoped>
+.input-field {
+	@apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.file-input {
+	@apply w-full border border-dashed border-gray-400 p-2 rounded-lg cursor-pointer;
+}
 </style>

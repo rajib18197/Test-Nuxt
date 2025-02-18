@@ -79,8 +79,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import BlogCard from "@/components/BlogCard.vue";
+import { ref } from "vue";
 
 const email = ref("");
 

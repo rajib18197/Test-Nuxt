@@ -1,346 +1,249 @@
 <template>
-	<div
-		class="min-h-screen bg-white flex items-center justify-center p-4 mt-32 mb-20"
-	>
-		<div class="bg-gray-100 shadow-md rounded-lg w-full max-w-4xl p-6">
-			<h1 class="text-2xl font-semibold text-center text-gray-700 mb-4">
-				Join us today to connect with great ventures and make the most of your
-				investments!
-			</h1>
-
-			<div
-				class="bg-[#d1ac69] p-4 border border-gray-300 rounded mb-6 text-gray-600"
+	<div class="max-w-6xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-28 mb-20">
+		<!-- Back Button -->
+		<div class="mb-6">
+			<button
+				@click="goBack"
+				class="text-blue-600 hover:text-blue-800 font-semibold"
 			>
-				<p class="font-semibold mb-2">*Registration Notice</p>
-				<p>
-					To complete your registration, please note that a payment of [amount]
-					is required. You can make this payment through any of the following
-					methods:
-				</p>
-				<ul class="list-disc pl-5 mb-2">
-					<li>Mobile Wallet: [Mobile Wallet Number]</li>
-					<li>Bank Transfer: [Bank Account Details]</li>
-					<li>Cash Payment: [Applicable for offline registration]</li>
-				</ul>
-				<p>
-					Once the payment is made, kindly retain the receipt or transaction ID
-					as proof of payment. For any queries or assistance, feel free to
-					contact us at [Contact Information].
-				</p>
-			</div>
-
-			<form @submit.prevent="submitForm" class="space-y-6">
-				<!-- Full Name and Email -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>Your Full Name</label
-						>
-						<input
-							v-model="form.fullName"
-							type="text"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						/>
-					</div>
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>Email address</label
-						>
-						<input
-							v-model="form.email"
-							type="email"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						/>
-					</div>
-				</div>
-
-				<!-- NID, Phone, and Passport Number -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>NID number</label
-						>
-						<input
-							v-model="form.nid"
-							type="text"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						/>
-					</div>
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>Phone number</label
-						>
-						<input
-							v-model="form.phone"
-							type="tel"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						/>
-					</div>
-				</div>
-				<div>
-					<label class="block text-sm font-medium text-gray-600"
-						>Passport number (if any)</label
-					>
-					<input
-						v-model="form.passportNumber"
-						type="text"
-						class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-					/>
-				</div>
-
-				<!-- File Uploads -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>NID Image/PDF</label
-						>
-						<input
-							@change="handleFileUpload('nidImage', $event)"
-							type="file"
-							accept=".pdf,image/*"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm"
-						/>
-					</div>
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>Passport size photo</label
-						>
-						<input
-							@change="handleFileUpload('passportPhoto', $event)"
-							type="file"
-							accept="image/*"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm"
-						/>
-					</div>
-				</div>
-				<div>
-					<label class="block text-sm font-medium text-gray-600"
-						>Passport Image (if any)</label
-					>
-					<input
-						@change="handleFileUpload('passportImage', $event)"
-						type="file"
-						accept="image/*"
-						class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm"
-					/>
-				</div>
-
-				<!-- Payment Method and Transaction ID -->
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>Select payment method</label
-						>
-						<select
-							v-model="form.paymentMethod"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						>
-							<option disabled value="">Choose a payment method</option>
-							<option>Mobile Wallet</option>
-							<option>Bank Transfer</option>
-							<option>Cash Payment</option>
-						</select>
-					</div>
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>Transaction ID</label
-						>
-						<input
-							v-model="form.transactionId"
-							type="text"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						/>
-					</div>
-				</div>
-
-				<!-- Division, District, and Thana -->
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>Division</label
-						>
-						<select
-							v-model="form.division"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						>
-							<option disabled value="">Select Division</option>
-							<option>Division 1</option>
-							<option>Division 2</option>
-							<option>Division 3</option>
-						</select>
-					</div>
-					<div>
-						<label class="block text-sm font-medium text-gray-600"
-							>District</label
-						>
-						<select
-							v-model="form.district"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						>
-							<option disabled value="">Select District</option>
-							<option>District 1</option>
-							<option>District 2</option>
-							<option>District 3</option>
-						</select>
-					</div>
-					<div>
-						<label class="block text-sm font-medium text-gray-600">Thana</label>
-						<select
-							v-model="form.thana"
-							class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-						>
-							<option disabled value="">Select Thana</option>
-							<option>Thana 1</option>
-							<option>Thana 2</option>
-							<option>Thana 3</option>
-						</select>
-					</div>
-				</div>
-
-				<!-- Full Address -->
-				<div>
-					<label class="block text-sm font-medium text-gray-600"
-						>Full Address</label
-					>
-					<textarea
-						v-model="form.address"
-						rows="3"
-						class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-					></textarea>
-				</div>
-
-				<!-- Investment Amount -->
-				<div>
-					<label class="block text-sm font-medium text-gray-600"
-						>Investment amount</label
-					>
-					<input
-						v-model="form.investmentAmount"
-						type="number"
-						class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-					/>
-				</div>
-
-				<!-- Submit Button -->
-				<div class="text-center">
-					<button
-						type="submit"
-						class="bg-blue-600 text-white px-8 py-2 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
-					>
-						Submit
-					</button>
-				</div>
-			</form>
-
-			<!-- <p class="text-sm text-center text-gray-600 mt-4">
-				<a
-					href="#"
-					class="text-blue-600 hover:underline"
-					@click.prevent="openModal"
-					>Read terms and conditions</a
-				>
-			</p> -->
-			<!-- Terms & Conditions Modal -->
-			<div
-				v-show="showModal"
-				class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-			>
-				<div
-					class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto"
-				>
-					<div class="flex justify-between items-center mb-4">
-						<h2 class="text-2xl font-semibold">Terms & Conditions</h2>
-						<button
-							@click="toggleModal"
-							class="text-gray-500 hover:text-gray-700"
-						>
-							<svg
-								class="w-6 h-6"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M6 18L18 6M6 6l12 12"
-								/>
-							</svg>
-						</button>
-					</div>
-					<div class="space-y-4 text-gray-600">
-						<p>Please read these terms carefully before proceeding:</p>
-						<!-- Add your actual terms content here -->
-						<p>
-							1. By registering, you agree to our privacy policy and terms of
-							service.
-						</p>
-						<p>
-							2. All investments carry risk, and past performance is not
-							indicative of future results.
-						</p>
-						<p>
-							3. You must maintain accurate and up-to-date registration
-							information.
-						</p>
-						<p>
-							4. We reserve the right to verify all submitted documents and
-							information.
-						</p>
-						<p>
-							5. Any fraudulent activity will result in immediate account
-							termination.
-						</p>
-					</div>
-					<div class="mt-6 text-right">
-						<button
-							@click="toggleModal"
-							class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-						>
-							I Understand
-						</button>
-					</div>
-				</div>
-			</div>
-
-			<!-- Existing form content -->
-			<div class="bg-gray-100 w-full max-w-5xl p-6 items-center">
-				<!-- ... existing form elements ... -->
-
-				<p class="text-sm text-gray-600 mt-2 text-center">
-					<a
-						href="#"
-						@click.prevent="toggleModal"
-						class="text-blue-600 hover:underline"
-					>
-						Read terms and conditions
-					</a>
-				</p>
-			</div>
+				← Back
+			</button>
 		</div>
-	</div>
 
-	<!-- Modal for Terms and Conditions
-	<div
-		v-if="isModalOpen"
-		class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-	>
-		<div class="bg-white p-8 rounded-lg w-3/4 md:w-1/2">
-			<h1 class="text-2xl font-bold mb-6">ICB Terms & Conditions</h1>
-			<p class="text-gray-700 mb-4">
-				Terms and Conditions content goes here...
+		<!-- Header -->
+		<div class="text-center mb-8">
+			<h2 class="text-2xl font-semibold text-gray-800">
+				Join us today to connect with great ventures and <br />
+				make the most of your investments!
+			</h2>
+		</div>
+
+		<!-- Registration Notice -->
+		<div class="bg-[#D1AC69] p-6 rounded-lg mb-6">
+			<h3 class="font-semibold text-gray-700">*Registration Notice</h3>
+			<p class="text-sm text-gray-600">
+				To complete your registration, please note that a payment of [amount] is
+				required. You can make this payment through any of the following
+				methods:
 			</p>
-			<div class="flex justify-end">
+			<ul class="list-disc text-sm text-gray-600 pl-4">
+				<li>Mobile Wallet: [Mobile Wallet Number]</li>
+				<li>Bank Transfer: [Bank Account Details]</li>
+				<li>Cash Payment: [Applicable for offline registration]</li>
+			</ul>
+			<p class="text-sm text-gray-600">
+				Once the payment is made, kindly retain the receipt or transaction ID as
+				proof of payment. For any queries or assistance, feel free to contact us
+				at [Contact Information].
+			</p>
+		</div>
+
+		<!-- Form -->
+		<form
+			@submit.prevent="handleSubmit"
+			class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"
+		>
+			<!-- Full Name & Email -->
+			<div>
+				<label class="block text-gray-700">Your Full Name</label>
+				<input
+					v-model="form.fullName"
+					type="text"
+					class="input-field"
+					placeholder="Enter full name"
+				/>
+			</div>
+			<div>
+				<label class="block text-gray-700">Email address</label>
+				<input
+					v-model="form.email"
+					type="email"
+					class="input-field"
+					placeholder="Enter email"
+				/>
+			</div>
+
+			<!-- NID Number & NID Image -->
+			<div>
+				<label class="block text-gray-700">NID number</label>
+				<input
+					v-model="form.nidNumber"
+					type="text"
+					class="input-field"
+					placeholder="Enter NID number"
+				/>
+			</div>
+			<div>
+				<label class="block text-gray-700">NID image/PDF</label>
+				<input
+					@change="handleFileUpload($event, 'nidImage')"
+					type="file"
+					class="file-input"
+				/>
+			</div>
+
+			<!-- Phone Number & Passport Number -->
+			<div>
+				<label class="block text-gray-700">Phone number</label>
+				<input
+					v-model="form.phoneNumber"
+					type="text"
+					class="input-field"
+					placeholder="Enter phone number"
+				/>
+			</div>
+			<div>
+				<label class="block text-gray-700">Passport number (if any)</label>
+				<input
+					v-model="form.passportNumber"
+					type="text"
+					class="input-field"
+					placeholder="Enter passport number"
+				/>
+			</div>
+
+			<!-- Passport Photo & Image -->
+			<div>
+				<label class="block text-gray-700">Passport size photo</label>
+				<input
+					@change="handleFileUpload($event, 'passportPhoto')"
+					type="file"
+					class="file-input"
+				/>
+			</div>
+			<div>
+				<label class="block text-gray-700">Passport Image (if any)</label>
+				<input
+					@change="handleFileUpload($event, 'passportImage')"
+					type="file"
+					class="file-input"
+				/>
+			</div>
+
+			<!-- Payment Method & Transaction ID -->
+			<div>
+				<label class="block text-gray-700">Select payment method</label>
+				<select v-model="form.paymentMethod" class="input-field">
+					<option value="" disabled selected>Select Payment Method</option>
+					<option>Mobile Wallet</option>
+					<option>Bank Transfer</option>
+					<option>Cash Payment</option>
+				</select>
+			</div>
+			<div>
+				<label class="block text-gray-700">Transaction ID</label>
+				<input
+					v-model="form.transactionId"
+					type="text"
+					class="input-field"
+					placeholder="Enter transaction ID"
+				/>
+			</div>
+
+			<!-- Division, District, Thana -->
+			<div class="col-span-2 grid grid-cols-3 gap-4">
+				<div>
+					<label class="block text-gray-700">Division</label>
+					<select
+						v-model="form.division"
+						@change="updateDistricts"
+						class="input-field"
+					>
+						<option value="" disabled selected>Select Division</option>
+						<option
+							v-for="division in divisions"
+							:key="division"
+							:value="division"
+						>
+							{{ division }}
+						</option>
+					</select>
+				</div>
+				<div>
+					<label class="block text-gray-700">District</label>
+					<select
+						v-model="form.district"
+						@change="updateThanas"
+						class="input-field"
+					>
+						<option value="" disabled selected>Select District</option>
+						<option
+							v-for="district in districts"
+							:key="district"
+							:value="district"
+						>
+							{{ district }}
+						</option>
+					</select>
+				</div>
+				<div>
+					<label class="block text-gray-700">Thana</label>
+					<select v-model="form.thana" class="input-field">
+						<option value="" disabled selected>Select Thana</option>
+						<option v-for="thana in thanas" :key="thana" :value="thana">
+							{{ thana }}
+						</option>
+					</select>
+				</div>
+			</div>
+
+			<!-- Full Address & Investment Amount -->
+			<div class="col-span-2">
+				<label class="block text-gray-700">Full Address</label>
+				<textarea
+					v-model="form.fullAddress"
+					class="input-field"
+					placeholder="Enter full address"
+				></textarea>
+			</div>
+
+			<div class="col-span-2">
+				<label class="block text-gray-700">Investment amount</label>
+				<input
+					v-model="form.investmentAmount"
+					type="text"
+					class="input-field"
+					placeholder="Enter investment amount"
+				/>
+			</div>
+
+			<!-- Submit Button -->
+			<div class="col-span-2 text-center mt-6">
 				<button
-					class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700"
-					@click="closeModal"
+					type="submit"
+					class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+				>
+					Submit
+				</button>
+			</div>
+		</form>
+
+		<!-- Terms and Conditions Link -->
+		<div class="text-center mt-6">
+			<a href="#" class="text-blue-600" @click.prevent="toggleModal"
+				>Read terms and conditions</a
+			>
+		</div>
+
+		<!-- Terms and Conditions Modal -->
+		<div
+			v-if="showModal"
+			class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
+		>
+			<div class="bg-white p-8 rounded-lg shadow-lg w-3/4 md:w-1/2">
+				<h2 class="text-xl font-semibold mb-4">Terms and Conditions</h2>
+				<p class="mb-4 text-sm text-gray-600">
+					Here are the terms and conditions...
+				</p>
+				<button
+					@click="toggleModal"
+					class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
 				>
 					Close
 				</button>
 			</div>
 		</div>
-	</div> -->
+	</div>
 </template>
 
 <script>
@@ -348,46 +251,74 @@ export default {
 	data() {
 		return {
 			showModal: false,
-			// ... existing data properties ...
 			form: {
 				fullName: "",
 				email: "",
-				nid: "",
-				phone: "",
+				nidNumber: "",
+				phoneNumber: "",
 				passportNumber: "",
-				nidImage: null,
-				passportPhoto: null,
-				passportImage: null,
-				paymentMethod: "",
-				transactionId: "",
 				division: "",
 				district: "",
 				thana: "",
-				address: "",
-				investmentAmount: null,
+				fullAddress: "",
+				paymentMethod: "",
+				transactionId: "",
+				investmentAmount: "",
+				nidImage: null,
+				passportPhoto: null,
+				passportImage: null,
 			},
-			isModalOpen: false,
+			divisions: ["Dhaka", "Chattogram", "Sylhet", "Khulna"],
+			districts: [],
+			thanas: [],
+			divisionData: {
+				Dhaka: ["Dhaka", "Gazipur", "Narayanganj"],
+				Chattogram: ["Chattogram", "Coxs Bazar", "Bandarban"],
+				Sylhet: ["Sylhet", "Moulvibazar", "Habiganj"],
+				Khulna: ["Khulna", "Jessore", "Satkhira"],
+			},
+			thanaData: {
+				Dhaka: ["Tejgaon", "Gulshan", "Mohammadpur"],
+				Gazipur: ["Tongi", "Kaliakair", "Kapasia"],
+				Narayanganj: ["Fatullah", "Siddhirganj", "Sonargaon"],
+				Chattogram: ["Pahartali", "Halishahar", "Double Mooring"],
+			},
 		};
 	},
 	methods: {
 		toggleModal() {
 			this.showModal = !this.showModal;
 		},
-		// ... existing methods ...
-		handleFileUpload(field, event) {
-			const file = event.target.files[0];
-			this.form[field] = file;
+		updateDistricts() {
+			this.districts = this.divisionData[this.form.division] || [];
+			this.form.district = "";
+			this.form.thana = "";
+			this.thanas = [];
 		},
-		submitForm() {
-			console.log("Form Data:", this.form);
+		updateThanas() {
+			this.thanas = this.thanaData[this.form.district] || [];
+			this.form.thana = "";
+		},
+		handleFileUpload(event, field) {
+			this.form[field] = event.target.files[0];
+		},
+		handleSubmit() {
+			console.log("Form submitted:", this.form);
 			alert("Form submitted successfully!");
 		},
-		// openModal() {
-		// 	this.isModalOpen = true;
-		// },
-		// closeModal() {
-		// 	this.isModalOpen = false;
-		// },
+		goBack() {
+			this.$router.go(-1); // Goes one step back in browser history
+		},
 	},
 };
 </script>
+
+<style scoped>
+.input-field {
+	@apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.file-input {
+	@apply w-full border border-dashed border-gray-400 p-2 rounded-lg cursor-pointer;
+}
+</style>
