@@ -1,48 +1,48 @@
-// server/api/uploadthing.ts
-import { createUploadthing, type FileRouter } from "uploadthing/h3";
-import { defineEventHandler, H3Event } from "h3";
+import { createUploadthing } from "uploadthing/h3";
+import type { FileRouter } from "uploadthing/h3";
 
 const f = createUploadthing();
 
-const auth = (ev: H3Event) => ({ id: "fakeId" }); // Fake auth function
-
-// FileRouter for your app, can contain multiple FileRoutes
 export const uploadRouter = {
-	// Define as many FileRoutes as you like, each with a unique routeSlug
-	imageUploader: f({
-		image: {
-			/**
-			 * For full list of options and defaults, see the File Route API reference
-			 * @see https://docs.uploadthing.com/file-routes#route-config
-			 */
-			maxFileSize: "4MB",
-			maxFileCount: 1,
-		},
-	})
-		// Set permissions and file types for this FileRoute
-		.middleware(async ({ event }) => {
-			// This code runs on your server before upload
-			const user = await auth(event);
+  videoAndImage: f({
+    image: {
+      maxFileSize: "4MB",
+      maxFileCount: 4,
+    },
+    video: {
+      maxFileSize: "16MB",
+    },
+  })
+    .middleware(({ event }) => {
+      event;
+      return { foo: "bar" as const };
+    })
+    .onUploadComplete(({ file, metadata }) => {
+      metadata;
 
-			// If you throw, the user will not be able to upload
-			if (!user) throw new Error("Unauthorized");
+      console.log("upload completed", file);
+      return { foo: "bar" as const };
+    }),
+  e2: f({
+    image: {
+      maxFileSize: "4MB",
+      maxFileCount: 4,
+    },
+    video: {
+      maxFileSize: "16MB",
+    },
+  })
+    .middleware(({ event }) => {
+      event;
 
-			// Whatever is returned here is accessible in onUploadComplete as `metadata`
-			return { userId: user.id };
-		})
-		.onUploadComplete(async ({ metadata, file }) => {
-			// This code RUNS ON YOUR SERVER after upload
-			console.log("Upload complete for userId:", metadata.userId);
+      return { foo: "bar" as const };
+    })
+    .onUploadComplete(({ file, metadata }) => {
+      metadata;
+      console.log("upload completed", file);
 
-			console.log("file url", file.url);
-		}),
+      return { bar: "baz" as const };
+    }),
 } satisfies FileRouter;
 
 export type UploadRouter = typeof uploadRouter;
-
-// this is very important, make sure you expose the handler correctly
-export const { upload, utapi } = createUploadthing(uploadRouter);
-
-export default defineEventHandler((event: H3Event) => {
-	return upload(event);
-});
