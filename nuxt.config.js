@@ -40,7 +40,6 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@uploadthing/nuxt",
   ],
-
   googleFonts: {
     families: {
       Montserrat: true,

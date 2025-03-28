@@ -139,7 +139,8 @@ const validators = {
 const validateField = (fieldName) => {
   touched[fieldName] = true;
 
-  if (validators[fieldName]) {
+  if (validators[fieldName](form[fieldName])) {
+    console.log(validators[fieldName](form[fieldName]), 111);
     const errorMessage = validators[fieldName](form[fieldName]);
     if (errorMessage) {
       errors[fieldName] = errorMessage;
@@ -172,13 +173,32 @@ const handleSubmit = async () => {
   isSubmitting.value = true;
 
   // Validate all fields
-  const isValid = validateAllFields();
+  // const isValid = validateAllFields();
+  const isValid = true;
 
   if (isValid) {
     try {
       // Form submission logic here
       console.log("Form submitted successfully:", form);
+      console.log(JSON.stringify(form));
       // ***** api call here****
+      const res = await fetch("http://103.174.50.71:8080/location/division", {
+        method: "GET",
+        // mode: "no-cors",
+      });
+      // const res = await fetch(
+      //   "http://103.174.50.71:8080/swagger-ui/index.html#/",
+      //   {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify(form),
+      //   }
+      // );
+
+      console.log(res);
+
+      const data = await res.json();
+      console.log("Success:", data);
 
       // Reset form or redirect user
     } catch (error) {
@@ -291,7 +311,7 @@ const { startUpload } = useUploadThing("videoAndImage", {
       <div>
         <label class="block text-gray-700">NID number</label>
         <input
-          v-model="nid"
+          v-model="form.nid"
           type="text"
           @blur="validateField('nid')"
           class="input-field w-full"
@@ -314,7 +334,7 @@ const { startUpload } = useUploadThing("videoAndImage", {
       <div>
         <label class="block text-gray-700">Phone number</label>
         <input
-          v-model="phone"
+          v-model="form.phone"
           type="text"
           @blur="validateField('phone')"
           @input="validateField('phone')"
@@ -452,7 +472,7 @@ const { startUpload } = useUploadThing("videoAndImage", {
       <div class="col-span-1 sm:col-span-2">
         <label class="block text-gray-700">Full Address</label>
         <textarea
-          v-model="address"
+          v-model="form.address"
           @blur="validateField('address')"
           @input="validateField('address')"
           class="input-field w-full"
